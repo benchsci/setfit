@@ -21,11 +21,9 @@ from sentence_transformers import InputExample, SentenceTransformer, models
 from sklearn.linear_model import LogisticRegression
 from sklearn.multiclass import OneVsRestClassifier
 from sklearn.multioutput import ClassifierChain, MultiOutputClassifier
-from torch.utils.data import DataLoader
 from tqdm.auto import trange
 
 from . import logging
-from .data import SetFitDataset
 
 
 if TYPE_CHECKING:
@@ -329,7 +327,7 @@ class SetFitModel(PyTorchModelHubMixin):
         batch_size: Optional[int] = None,
         max_length: Optional[int] = None,
         shuffle: bool = True,
-    ) -> DataLoader:
+    ):
         max_acceptable_length = self.model_body.get_max_seq_length()
         if max_length is None:
             max_length = max_acceptable_length
